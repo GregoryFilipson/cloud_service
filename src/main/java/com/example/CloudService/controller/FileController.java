@@ -14,6 +14,11 @@ import java.util.List;
 public class FileController {
 
     FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
     private final String ROOT_URL = "/";
 
     @GetMapping(value = "/list")
