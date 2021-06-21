@@ -8,11 +8,12 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "file_table")
+@Table(name = "files")
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+    @Column(name = "file_name")
     private String fileName;
     private byte[] data;
     @Column(name = "user_id")

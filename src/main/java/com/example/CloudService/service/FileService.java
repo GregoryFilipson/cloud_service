@@ -31,31 +31,35 @@ public class FileService {
         this.conversionService = conversionService;
     }
 
-    public byte[] downloadFileService(String fileName) throws IOException {
+    public byte[] downloadFile(String fileName) {
         Long userId = authorizationService.getUserId();
         return fileRepository.findFileByFileNameAndUserId(fileName, userId).getData();
     }
 
-    public String deleteFileService(String fileName) {
-        fileRepository.deleteFileByFileNameAndUserId(fileName, authorizationService.getUserId());
-        return "Файл успешно удален";
+//    public String deleteFileService(String fileName) {
+//        fileRepository.deleteFileByFileNameAndUserId(fileName, authorizationService.getUserId());
+//        return "Файл успешно удален";
+//    }
+
+    public int deleteFile(String fileName) {
+       return fileRepository.deleteFileByFileNameAndUserId(fileName, 1L);
     }
 
-    public String uploadFileService (MultipartFile file, String fileName) {
+    public String uploadFileService (MultipartFile file) {
         if (file.isEmpty()) {
             LOG.error("Can't upload, file is empty.");
-            return "Вам не удалось загрузить " + file.getName() + " потому что файл пустой.";
+            return "Вам не удалось загрузить " + file.getOriginalFilename()+ " потому что файл пустой.";
         }
 
         try {
             File fileEntity = new File();
-            fileEntity.setFileName(fileName);
+            fileEntity.setFileName(file.getOriginalFilename());
             fileEntity.setData(file.getBytes());
             fileEntity.setUserId(authorizationService.getUserId());
             fileRepository.save(fileEntity);
-            return "Вы удачно загрузили " + file.getName();
+            return "Вы удачно загрузили " + file.getOriginalFilename();
         } catch (Exception e) {
-            return "Вам не удалось загрузить " + file.getName() + " => " + e.getMessage();
+            return "Вам не удалось загрузить " + file.getOriginalFilename() + " => " + e.getMessage();
         }
     }
 

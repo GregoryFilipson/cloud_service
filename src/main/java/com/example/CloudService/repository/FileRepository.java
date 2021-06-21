@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FileRepository extends JpaRepository<File, String> {
+public interface FileRepository extends JpaRepository<File, Integer> {
     List<File> findByUserId(Long userId);
-    File deleteFileByFileNameAndUserId(String fileName, Long userId);
+    Integer deleteFileByFileNameAndUserId(String fileName, Long userId);
     File findFileByFileNameAndUserId(String name, Long userId);
     File findFileByFileName(String fileName);
 }

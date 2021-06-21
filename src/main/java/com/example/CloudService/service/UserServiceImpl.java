@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService { //подкл Spring Securi
 //    @Autowired
 //    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     public User login(String login, String password) {
         return userRepository.findByLoginAndPassword(login, password);
     }

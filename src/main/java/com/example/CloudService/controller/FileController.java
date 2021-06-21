@@ -28,11 +28,9 @@ public class FileController {
 
     @PostMapping(value = "/upload")
     public @ResponseBody
-    String handleFileUpload(@RequestParam("name") String name,
-                            @RequestParam("file") MultipartFile file) {
-        return fileService.uploadFileService(file, name);
+    String handleFileUpload(@RequestParam("file") MultipartFile file) {
+        return fileService.uploadFileService(file);
     }
-
 
     @GetMapping(
             value = "/getFiles",
@@ -40,16 +38,30 @@ public class FileController {
     )
     public @ResponseBody
     byte[] getFileWithMediaType(String fileName) throws IOException {
-        return fileService.downloadFileService(fileName);
+        return fileService.downloadFile(fileName);
     }
 
     @PutMapping (value = ROOT_URL)
-    public @ResponseBody String editFileName (String nameFileWhichWeWantToEdit, String newFileName) {
-        return fileService.editFileName(nameFileWhichWeWantToEdit, newFileName);
+    public @ResponseBody String editFileName (String nameFileWeWantToEdit, String newFileName) {
+        return fileService.editFileName(nameFileWeWantToEdit, newFileName);
     }
 
     @DeleteMapping(value = ROOT_URL)
-    public Object deleteFiles(String fileName) {
-        return fileService.deleteFileService(fileName);
+    public String deleteFiles(String fileName) {
+        fileService.deleteFile(fileName);
+        return "Вы успешно удалили файл";
     }
+
+    // методы для терстирования работы без фронтэнда
+//        @PutMapping (value = "/edit")
+//    public @ResponseBody String editFileName (@RequestParam ("name") String nameFileWhatWeWantToEdit,
+//                                              @RequestParam ("newFileName") String newFileName) {
+//        return fileService.editFileName(nameFileWhatWeWantToEdit, newFileName);
+//    }
+
+//    @DeleteMapping(value = "/delete")
+//    public String deleteFiles(@RequestParam("filename") String fileName) {
+//        fileService.deleteFile(fileName);
+//        return "Вы успешно удалили файл";
+//    }
 }
