@@ -1,6 +1,7 @@
 package com.example.CloudService.repository;
 
 import com.example.CloudService.model.File;
+import com.example.CloudService.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
