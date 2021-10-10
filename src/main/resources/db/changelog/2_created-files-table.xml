@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="gregory" id="2">
+        <sql>
+            create table files
+            (
+            id        int auto_increment
+            primary key,
+            file_name varchar(255) null,
+            data      longblob     null,
+            user_id   bigint       null
+            );
+        </sql>
+
+        <rollback>
+            <dropTable tableName="files"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
+
+
+
+
+
+
+
